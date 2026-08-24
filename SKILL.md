@@ -61,7 +61,7 @@ Do not replace the bundled template with a generic Pandoc PDF unless the user ex
 
 `scripts/build-pdf.sh` runs Pandoc with:
 
-- `templates/cu-pid-template.tex` as the LaTeX template
+- `templates/cu-template.tex` as the LaTeX template
 - `xelatex` as the PDF engine
 - the Markdown file as input
 - the Markdown directory and bundled asset directory as resource paths

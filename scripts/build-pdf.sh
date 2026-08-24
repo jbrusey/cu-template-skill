@@ -45,7 +45,7 @@ fi
 mkdir -p "$(dirname "$output")"
 cd "$skill_dir"
 "$pandoc_bin" "$input" \
-  --template="$skill_dir/templates/cu-pid-template.tex" \
+  --template="$skill_dir/templates/cu-template.tex" \
   --pdf-engine="$engine" \
   --resource-path="$(dirname "$input"):$skill_dir/templates/assets" \
   -o "$output"
