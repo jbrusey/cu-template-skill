@@ -1,4 +1,4 @@
-# Build without pi
+# Manual setup and build
 
 You need Pandoc and a TeX distribution that provides `xelatex`.
 

@@ -11,7 +11,7 @@ Install https://github.com/jbrusey/cu-template-skill as a skill.
 ```
 
 - [Install and use with pi](PI.md)
-- [Install PDF tools and build without pi](BUILD.md)
+- [Manual setup and build](BUILD.md)
 
 ## Markdown input
 
