@@ -2,6 +2,14 @@
 
 A set of pi skills for turning Markdown into Coventry University-branded PDFs with Pandoc and XeLaTeX. The main skill includes the LaTeX template and branding assets.
 
+## Install with an AI coding client
+
+In your favourite AI coding client, enter:
+
+```text
+Install https://github.com/jbrusey/cu-template-skill as a skill.
+```
+
 - [Install and use with pi](PI.md)
 - [Install PDF tools and build without pi](BUILD.md)
 
