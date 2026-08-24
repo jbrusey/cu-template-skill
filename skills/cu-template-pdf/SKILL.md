@@ -1,69 +1,50 @@
 ---
 name: cu-template-pdf
-description: Creates Coventry University-branded PDFs from Markdown using the bundled CU template. Use when a user asks to turn a Markdown document into a CU-templated PDF, or needs Pandoc/XeLaTeX setup and build instructions.
+description: Creates Coventry University-branded PDFs from Markdown with the bundled template. Use when turning Markdown into a CU-templated PDF.
 ---
 
 # CU templated PDF
 
-Use the template and assets in this skill; do not look for the original Delivery Materials folder at runtime.
+Use the template and assets in this skill. Do not look for the original Delivery Materials folder.
+
+## Check tools
+
+The build needs `pandoc` and `xelatex`. If either is missing, load the installer skill for the current operating system:
+
+- Windows: `/skill:cu-template-pdf-install-windows`
+- macOS: `/skill:cu-template-pdf-install-macos`
+- Ubuntu: `/skill:cu-template-pdf-install-ubuntu`
+
+After installation, verify that both commands are on `PATH` before continuing.
 
 ## Build
 
-From the skill directory, run:
+Run the command from this skill's directory. Replace the input and output paths. On macOS/Linux, use `:` between resource paths:
 
 ```bash
-./scripts/build-pdf.sh /absolute/path/to/document.md
+pandoc /absolute/path/to/document.md --template=templates/cu-template.tex --pdf-engine=xelatex --resource-path="/absolute/path/to:templates/assets" -o /absolute/path/to/document.pdf
 ```
 
-The script writes a PDF beside the Markdown file. Supply a second argument to choose the output path:
+In Windows PowerShell, use `;` between resource paths:
 
-```bash
-./scripts/build-pdf.sh document.md output.pdf
+```powershell
+pandoc C:\path\to\document.md --template=templates/cu-template.tex --pdf-engine=xelatex '--resource-path=C:\path\to;templates\assets' -o C:\path\to\document.pdf
 ```
 
-The Markdown should normally include Pandoc YAML metadata such as:
+The Markdown should normally include Pandoc YAML metadata:
 
 ```yaml
 ---
 title: "Document title"
 subtitle: "Optional subtitle"
 author: "Optional author"
-date: "Optional date"
+date: "Version 1.0"
 lang: en-GB
 ---
 ```
 
-Use ordinary Markdown headings, lists, tables, links, and emphasis. Raw LaTeX such as `\vspace{8mm}` is supported by the build.
+Use headings, lists, tables, links, images, and emphasis. Raw LaTeX such as `\vspace{8mm}` is supported.
 
-## Tool setup
+Do not replace the bundled template with a generic Pandoc PDF unless the user asks for an unbranded document. If the build fails, inspect the Pandoc/XeLaTeX error for missing packages, fonts, invalid raw LaTeX, or unsupported Markdown.
 
-Check the current machine before building:
-
-```bash
-command -v pandoc && pandoc --version | head -3
-command -v xelatex
-```
-
-If either command is missing, install the smallest suitable toolchain:
-
-- macOS with Homebrew: `brew install pandoc` and `brew install --cask mactex`
-- Debian/Ubuntu: `sudo apt-get install pandoc texlive-xetex`
-
-After installing MacTeX, restart the shell if `xelatex` is not yet on `PATH`. The script uses `PDF_ENGINE` when set, otherwise `xelatex`:
-
-```bash
-PDF_ENGINE=xelatex ./scripts/build-pdf.sh document.md
-```
-
-Do not replace the bundled template with a generic Pandoc PDF unless the user explicitly asks for an unbranded document. If the build fails, inspect the Pandoc/XeLaTeX error first; common causes are missing fonts/packages, invalid raw LaTeX, or unsupported Markdown syntax.
-
-## What the build does
-
-`scripts/build-pdf.sh` runs Pandoc with:
-
-- `templates/cu-template.tex` as the LaTeX template
-- `xelatex` as the PDF engine
-- the Markdown file as input
-- the Markdown directory and bundled asset directory as resource paths
-
-The template adds the CU title page, colours, typography, page numbers, branded background, logo, and closing page. Keep `templates/assets/background-image.pdf` and `templates/assets/cu-logo.pdf` with the template.
+The template adds the CU title page, colours, typography, page numbers, background image, logo, and closing page. Keep the files in `templates/assets/` with the template.

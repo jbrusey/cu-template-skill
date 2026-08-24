@@ -1,10 +1,10 @@
-# CU Template PDF Skill
+# CU Template PDF Skills
 
-A pi skill that turns Markdown into Coventry University-branded PDFs with Pandoc and XeLaTeX. The repository includes the LaTeX template and branding assets.
+A set of pi skills for turning Markdown into Coventry University-branded PDFs with Pandoc and XeLaTeX. The main skill includes the LaTeX template and branding assets.
 
 ## Install in pi
 
-Pi can install the repository directly:
+Pi installs the package and discovers all four skills:
 
 ```bash
 pi install git:github.com/jbrusey/cu-template-skill
@@ -22,25 +22,23 @@ You can also ask a coding agent:
 Install https://github.com/jbrusey/cu-template-skill as a skill.
 ```
 
-Then ask:
+Use the main skill:
 
 ```text
 Use the cu-template-pdf skill to build a PDF from ./project.md.
 ```
 
-The skill lives at `skills/cu-template-pdf/SKILL.md`. Agent Skills-compatible tools can copy that directory into their skills directory, for example:
+The package includes platform-specific setup skills. The main skill loads the appropriate one when `pandoc` or `xelatex` is missing:
 
-```bash
-cp -R skills/cu-template-pdf ~/.claude/skills/
-```
+- `cu-template-pdf-install-windows`
+- `cu-template-pdf-install-macos`
+- `cu-template-pdf-install-ubuntu`
 
-## Install the PDF tools
+## Install the PDF tools manually
 
 You need Pandoc and a TeX distribution that provides `xelatex`.
 
 ### Windows
-
-Install with WinGet:
 
 ```powershell
 winget install --id JohnMacFarlane.Pandoc -e
@@ -56,38 +54,30 @@ brew install pandoc
 brew install --cask mactex
 ```
 
-Restart the shell if `xelatex` is not on `PATH`.
-
-### Debian or Ubuntu
+### Ubuntu
 
 ```bash
+sudo apt-get update
 sudo apt-get install pandoc texlive-xetex
 ```
 
-Check the installation:
-
-```text
-pandoc --version
-xelatex --version
-```
+Check the installation with `pandoc --version` and `xelatex --version`.
 
 ## Build without pi
 
-From the repository root, build beside the Markdown file:
+Run from `skills/cu-template-pdf/`, replacing the input and output paths.
 
 macOS/Linux:
 
 ```bash
-./skills/cu-template-pdf/scripts/build-pdf.sh ./project.md
+pandoc /absolute/path/to/project.md --template=templates/cu-template.tex --pdf-engine=xelatex --resource-path="/absolute/path/to:templates/assets" -o /absolute/path/to/project.pdf
 ```
 
 Windows PowerShell:
 
 ```powershell
-.\skills\cu-template-pdf\scripts\build-pdf.ps1 .\project.md
+pandoc C:\path\to\project.md --template=templates/cu-template.tex --pdf-engine=xelatex '--resource-path=C:\path\to;templates\assets' -o C:\path\to\project.pdf
 ```
-
-Choose an output path by passing a second argument. Set `PDF_ENGINE` to use another compatible engine.
 
 ## Markdown input
 
