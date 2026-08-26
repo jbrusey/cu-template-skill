@@ -1,6 +1,6 @@
 {
   "name": "cu-template-skill",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Pi skill for creating Coventry University-branded PDFs from Markdown.",
   "keywords": ["pi-package", "agent-skill", "pdf", "pandoc"],
   "license": "MIT",

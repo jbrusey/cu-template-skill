@@ -43,7 +43,7 @@ lang: en-GB
 ---
 ```
 
-Use headings, lists, tables, links, images, and emphasis. Raw LaTeX such as `\vspace{8mm}` is supported.
+Use headings, lists, tables, links, images, and emphasis. Raw LaTeX such as `\vspace{8mm}` is supported. Set `twocolumn: true` in the YAML metadata for a two-column main body; the title page remains single-column.
 
 Do not replace the bundled template with a generic Pandoc PDF unless the user asks for an unbranded document. If the build fails, inspect the Pandoc/XeLaTeX error for missing packages, fonts, invalid raw LaTeX, or unsupported Markdown.
 

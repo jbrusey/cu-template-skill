@@ -27,7 +27,7 @@ lang: en-GB
 ---
 ```
 
-Use headings, lists, tables, links, images, and emphasis. Raw LaTeX such as `\vspace{8mm}` is also supported. The output includes the CU title page, colours, typography, page numbers, background image, logo, and closing page.
+Use headings, lists, tables, links, images, and emphasis. Raw LaTeX such as `\vspace{8mm}` is also supported. Set `twocolumn: true` for a two-column main body; the title page remains single-column. The output includes the CU title page, colours, typography, page numbers, background image, logo, and closing page.
 
 ## Example
 
