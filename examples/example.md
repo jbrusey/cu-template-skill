@@ -18,4 +18,4 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere, lorem 
 
 ## Example figure
 
-![Example figure showing three values.](figure.png)
+![Example figure showing three values.](figure.png){width=0.8\textwidth}
