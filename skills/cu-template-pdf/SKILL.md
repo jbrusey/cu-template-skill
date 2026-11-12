@@ -19,18 +19,19 @@ After installation, verify that both commands are on `PATH` before continuing.
 
 ## Build
 
-Use absolute paths for the bundled template and assets so the command works from any current directory. Set `SKILL_DIR` to the directory containing this `SKILL.md` (from the skill location shown when it was loaded), then replace the document paths below. Include the document's directory in `--resource-path` so relative images still resolve. On macOS/Linux, separate resource paths with `:`:
+Set `SKILL_DIR` to the directory containing this `SKILL.md` (from the skill location shown when it was loaded), then run Pandoc from that directory. This is required because the template loads its branding assets from `templates/assets/` relative to the working directory. Keep the document and output paths absolute. Include the document's directory in `--resource-path` so its relative images resolve. On macOS/Linux, separate resource paths with `:`:
 
 ```bash
 SKILL_DIR="/absolute/path/to/skills/cu-template-pdf"
-pandoc /absolute/path/to/document.md --template="$SKILL_DIR/templates/cu-template.tex" --pdf-engine=xelatex --resource-path="/absolute/path/to:$SKILL_DIR/templates/assets" -o /absolute/path/to/document.pdf
+cd "$SKILL_DIR" && pandoc /absolute/path/to/document.md --template=templates/cu-template.tex --pdf-engine=xelatex --resource-path="/absolute/path/to:$SKILL_DIR/templates/assets" -o /absolute/path/to/document.pdf
 ```
 
-In Windows PowerShell, set the same directory and separate resource paths with `;`:
+In Windows PowerShell, change to the skill directory before running Pandoc and separate resource paths with `;`:
 
 ```powershell
 $SkillDir = 'C:\path\to\skills\cu-template-pdf'
-pandoc C:\path\to\document.md --template="$SkillDir\templates\cu-template.tex" --pdf-engine=xelatex "--resource-path=C:\path\to;$SkillDir\templates\assets" -o C:\path\to\document.pdf
+Set-Location $SkillDir
+pandoc C:\path\to\document.md --template=templates/cu-template.tex --pdf-engine=xelatex "--resource-path=C:\path\to;$SkillDir\templates\assets" -o C:\path\to\document.pdf
 ```
 
 The Markdown should normally include Pandoc YAML metadata:
