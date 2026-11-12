@@ -19,13 +19,13 @@ After installation, verify that both commands are on `PATH` before continuing.
 
 ## Build
 
-Run the command from this skill's directory. Replace the input and output paths. On macOS/Linux, use `:` between resource paths:
+First change to this skill's directory (the directory containing `templates/`), not the document's directory. Use the skill location shown when this skill was loaded. The template path below is relative to that directory. Replace the input and output paths. On macOS/Linux, use `:` between resource paths:
 
 ```bash
 pandoc /absolute/path/to/document.md --template=templates/cu-template.tex --pdf-engine=xelatex --resource-path="/absolute/path/to:templates/assets" -o /absolute/path/to/document.pdf
 ```
 
-In Windows PowerShell, use `;` between resource paths:
+In Windows PowerShell, first `Set-Location` to this skill's directory (the directory containing `templates/`), then use `;` between resource paths:
 
 ```powershell
 pandoc C:\path\to\document.md --template=templates/cu-template.tex --pdf-engine=xelatex '--resource-path=C:\path\to;templates\assets' -o C:\path\to\document.pdf
@@ -40,8 +40,11 @@ subtitle: "Optional subtitle"
 author: "Optional author"
 date: "Version 1.0"
 lang: en-GB
+sansfont: Helvetica
 ---
 ```
+
+`sansfont` is optional; it changes the document's sans-serif typeface. For example, use `Helvetica` or `Linux Biolinum O`. The font must be installed and available to XeLaTeX. Omit it to keep the default typeface.
 
 Use headings, lists, tables, links, images, and emphasis. Raw LaTeX such as `\vspace{8mm}` is supported. Set `twocolumn: true` in the YAML metadata for a two-column main body; the title page remains single-column.
 

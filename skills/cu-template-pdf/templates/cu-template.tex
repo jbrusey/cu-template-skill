@@ -28,6 +28,9 @@
 }
 
 \renewcommand{\familydefault}{\sfdefault}
+$if(sansfont)$
+\setsansfont{$sansfont$}
+$endif$
 \addtokomafont{section}{\color{bodyblue}}
 \addtokomafont{subsection}{\normalfont\bfseries}
 \setkomafont{pageheadfoot}{\small\color{gray}}
@@ -71,7 +74,7 @@
         www.coventry.ac.uk}}};
   \end{tikzpicture}%
   \null
-  \newpage
+  \clearpage
   \nopagecolor
 }
 
