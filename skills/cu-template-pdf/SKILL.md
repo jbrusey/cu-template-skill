@@ -19,16 +19,18 @@ After installation, verify that both commands are on `PATH` before continuing.
 
 ## Build
 
-First change to this skill's directory (the directory containing `templates/`), not the document's directory. Use the skill location shown when this skill was loaded. The template path below is relative to that directory. Replace the input and output paths. On macOS/Linux, use `:` between resource paths:
+Use absolute paths for the bundled template and assets so the command works from any current directory. Set `SKILL_DIR` to the directory containing this `SKILL.md` (from the skill location shown when it was loaded), then replace the document paths below. Include the document's directory in `--resource-path` so relative images still resolve. On macOS/Linux, separate resource paths with `:`:
 
 ```bash
-pandoc /absolute/path/to/document.md --template=templates/cu-template.tex --pdf-engine=xelatex --resource-path="/absolute/path/to:templates/assets" -o /absolute/path/to/document.pdf
+SKILL_DIR="/absolute/path/to/skills/cu-template-pdf"
+pandoc /absolute/path/to/document.md --template="$SKILL_DIR/templates/cu-template.tex" --pdf-engine=xelatex --resource-path="/absolute/path/to:$SKILL_DIR/templates/assets" -o /absolute/path/to/document.pdf
 ```
 
-In Windows PowerShell, first `Set-Location` to this skill's directory (the directory containing `templates/`), then use `;` between resource paths:
+In Windows PowerShell, set the same directory and separate resource paths with `;`:
 
 ```powershell
-pandoc C:\path\to\document.md --template=templates/cu-template.tex --pdf-engine=xelatex '--resource-path=C:\path\to;templates\assets' -o C:\path\to\document.pdf
+$SkillDir = 'C:\path\to\skills\cu-template-pdf'
+pandoc C:\path\to\document.md --template="$SkillDir\templates\cu-template.tex" --pdf-engine=xelatex "--resource-path=C:\path\to;$SkillDir\templates\assets" -o C:\path\to\document.pdf
 ```
 
 The Markdown should normally include Pandoc YAML metadata:
